@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  <div style="text-align:center">Hi {{ user.username }}! Welcome to Event Management!!</div>
+
+{% else %}
+  <p>You are not logged in</p>
+  <h2>Login here</h2>
+  <form method='POST' action='.' enctype='multipart/form-data'> {% csrf_token %}
+      {{ form.as_p }}
+      <button type='submit'>Submit</button>
+  </form>
+{% endif %}
+{% endblock %}

@@ -20,6 +20,10 @@ from blog.views import (
     blog_post_create_view,
 )
 
+admin.site.site_header = 'Event Management Administration'
+admin.site.site_title = 'Event Posts Administration'
+admin.site.index_title = 'Event Administration'
+
 from searches.views import search_view
 from .views import (
     home_page,
@@ -27,7 +31,6 @@ from .views import (
     contact_page,
     example_page
 )
-
 
 urlpatterns = [
     path('', home_page),
