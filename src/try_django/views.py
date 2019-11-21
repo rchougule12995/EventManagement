@@ -1,12 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import get_template
+from django.contrib.auth.decorators import login_required
 # Dont Repeat Yourself = DRY
 
 from .forms import ContactForm
 from blog.models import BlogPost
 
-
+@login_required
 def home_page(request):
     my_title = ""
     qs = BlogPost.objects.all()[:5]
@@ -16,8 +17,6 @@ def home_page(request):
 
 def about_page(request):
     return render(request, "about.html", {"title": "About"})
-
-
 
 def contact_page(request):
     form = ContactForm(request.POST or None)
