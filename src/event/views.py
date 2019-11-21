@@ -11,10 +11,10 @@ from .models import EventPost
 def event_post_list_view(request):
     # list out objects
     # could be search
-    qs = EventPost.objects.all().published() # queryset -> list of python object
-    if request.user.is_authenticated:
-        my_qs = EventPost.objects.filter(user=request.user)
-        qs = (qs | my_qs).distinct()
+    qs = EventPost.objects.filter(status='published') # queryset -> list of python object
+    #if request.user.is_authenticated:
+    #my_qs = EventPost.objects.filter(user=request.user)
+    #qs = (qs | my_qs).distinct()
     template_name = 'event/list.html'
     context = {'object_list': qs}
     return render(request, template_name, context)
@@ -64,3 +64,13 @@ def event_post_delete_view(request, slug):
         return redirect("/event")
     context = {"object": obj}
     return render(request, template_name, context)
+
+@staff_member_required
+def event_post_archive_view(request, slug):
+    obj = get_object_or_404(EventPost, slug=slug)
+    print(obj.status)
+    obj.status='archive'
+    print("NEW STATUS")
+    print(obj.status)
+    obj.save()
+    return redirect('/event')
