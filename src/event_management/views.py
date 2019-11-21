@@ -10,7 +10,7 @@ from event.models import EventPost
 #@login_required
 def home_page(request):
     my_title = ""
-    qs = EventPost.objects.all()[:5]
+    qs = EventPost.objects.filter(status='published')[:5]
     context = {"title": "Welcome to Event Management", 'event_list': qs}
     return render(request, "home.html", context)
 

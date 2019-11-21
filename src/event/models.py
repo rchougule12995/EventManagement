@@ -48,6 +48,7 @@ class EventPost(models.Model): # eventpost_set -> queryset
     publish_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(default='published', max_length=120, choices=(('draft','draft'),('published','published'),('archive','archive')))
 
     objects = EventPostManager()
 
@@ -62,4 +63,3 @@ class EventPost(models.Model): # eventpost_set -> queryset
 
     def get_delete_url(self):
         return f"{self.get_absolute_url()}/delete"
-
