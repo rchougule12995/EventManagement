@@ -7,18 +7,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import EventPostModelForm
 from .models import EventPost
 
-# CRUD
-
-# GET -> Retrieve / List
-
-# POST -> Create / Update / DELETE
-
-# Create Retrieve Update Delete
-
-
 
 def event_post_list_view(request):
-    # list out objects 
+    # list out objects
     # could be search
     qs = EventPost.objects.all().published() # queryset -> list of python object
     if request.user.is_authenticated:
@@ -26,7 +17,7 @@ def event_post_list_view(request):
         qs = (qs | my_qs).distinct()
     template_name = 'event/list.html'
     context = {'object_list': qs}
-    return render(request, template_name, context) 
+    return render(request, template_name, context)
 
 
 # @login_required
@@ -43,7 +34,7 @@ def event_post_create_view(request):
         form = EventPostModelForm()
     template_name = 'form.html'
     context = {'form': form}
-    return render(request, template_name, context)  
+    return render(request, template_name, context)
 
 
 def event_post_detail_view(request, slug):
@@ -51,7 +42,7 @@ def event_post_detail_view(request, slug):
     obj = get_object_or_404(EventPost, slug=slug)
     template_name = 'event/detail.html'
     context = {"object": obj}
-    return render(request, template_name, context)   
+    return render(request, template_name, context)
 
 @staff_member_required
 def event_post_update_view(request, slug):
@@ -61,7 +52,7 @@ def event_post_update_view(request, slug):
         form.save()
     template_name = 'form.html'
     context = {"title": f"Update {obj.title}", "form": form}
-    return render(request, template_name, context)  
+    return render(request, template_name, context)
 
 
 @staff_member_required
@@ -72,13 +63,4 @@ def event_post_delete_view(request, slug):
         obj.delete()
         return redirect("/event")
     context = {"object": obj}
-    return render(request, template_name, context)  
-
-
-
-
-
-
-
-
-
+    return render(request, template_name, context)

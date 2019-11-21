@@ -29,8 +29,6 @@ def contact_page(request):
     }
     return render(request, "form.html", context)
 
-
-
 def example_page(request):
     context         =  {"title": "Example"}
     template_name   = "hello_world.html"

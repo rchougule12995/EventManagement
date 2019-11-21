@@ -34,7 +34,6 @@ from .views import (
 
 urlpatterns = [
     path('', home_page),
-
     path('event-new/', event_post_create_view),
     path('event/', include('event.urls')),
     path('search/', search_view),
