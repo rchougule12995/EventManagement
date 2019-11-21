@@ -5,8 +5,8 @@
 <h1>{{ title }}</h1>
 
 
-{% for a in blog_list %}
-    {% include 'blog/list-inline.html' with blog_post=a truncate=True detail=False %}
+{% for a in event_list %}
+    {% include 'event/list-inline.html' with event_post=a truncate=True detail=False %}
 {% endfor %}
 
 

@@ -1,23 +1,23 @@
 from django import forms
 
-from .models import BlogPost 
+from .models import EventPost 
 
-class BlogPostForm(forms.Form):
+class EventPostForm(forms.Form):
     title = forms.CharField()
     slug = forms.SlugField()
     content = forms.CharField(widget=forms.Textarea)
 
 
 
-class BlogPostModelForm(forms.ModelForm):
+class EventPostModelForm(forms.ModelForm):
     class Meta:
-        model = BlogPost
+        model = EventPost
         fields = ['title', 'image', 'slug', 'content', 'publish_date']
 
     def clean_title(self, *args, **kwargs):
         instance = self.instance
         title = self.cleaned_data.get('title')
-        qs = BlogPost.objects.filter(title__iexact=title)
+        qs = EventPost.objects.filter(title__iexact=title)
         if instance is not None:
             qs = qs.exclude(pk=instance.pk) # id=instance.id
         if qs.exists():

@@ -9,12 +9,12 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('blog', '0005_auto_20190403_1712'),
+        ('event', '0005_auto_20190403_1712'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blogpost',
+            model_name='eventpost',
             name='user',
             field=models.ForeignKey(default=1, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL),
         ),

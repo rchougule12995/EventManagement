@@ -7,23 +7,23 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0006_blogpost_user'),
+        ('event', '0006_eventpost_user'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blogpost',
+            model_name='eventpost',
             name='publish_date',
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='blogpost',
+            model_name='eventpost',
             name='timestamp',
             field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='blogpost',
+            model_name='eventpost',
             name='updated',
             field=models.DateTimeField(auto_now=True),
         ),

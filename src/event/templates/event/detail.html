@@ -7,7 +7,7 @@
     <div class='row'>
 
 
-     {% include 'blog/list-inline.html' with blog_post=object detail=True %}
+     {% include 'event/list-inline.html' with event_post=object detail=True %}
 
     {% if request.user.is_authenticated %}
         {% if request.user.is_staff %}

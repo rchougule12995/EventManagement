@@ -19,9 +19,9 @@
                 {% endif %}
 
 
-                {% for blog_item in blog_list %}
+                {% for event_item in event_list %}
 
-                      {% include 'blog/list-inline.html' with blog_post=blog_item truncate=True detail=False %}
+                      {% include 'event/list-inline.html' with event_post=event_item truncate=True detail=False %}
                 {% endfor %}
 
 

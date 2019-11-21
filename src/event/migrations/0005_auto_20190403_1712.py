@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0004_auto_20190402_2135'),
+        ('event', '0004_auto_20190402_2135'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='blogpost',
+            model_name='eventpost',
             name='title',
             field=models.CharField(max_length=120),
         ),

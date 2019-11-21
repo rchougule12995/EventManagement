@@ -5,13 +5,13 @@ from django.contrib.auth.decorators import login_required
 # Dont Repeat Yourself = DRY
 
 from .forms import ContactForm
-from blog.models import BlogPost
+from event.models import EventPost
 
-@login_required
+#@login_required
 def home_page(request):
     my_title = ""
-    qs = BlogPost.objects.all()[:5]
-    context = {"title": "Welcome to Event Management", 'blog_list': qs}
+    qs = EventPost.objects.all()[:5]
+    context = {"title": "Welcome to Event Management", 'event_list': qs}
     return render(request, "home.html", context)
 
 

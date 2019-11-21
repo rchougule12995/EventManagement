@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from blog.models import BlogPost
+from event.models import EventPost
 
 from .models import SearchQuery
 
@@ -12,6 +12,6 @@ def search_view(request):
     context =  {"query": query}
     if query is not None:
         SearchQuery.objects.create(user=user, query=query)
-        blog_list = BlogPost.objects.search(query=query)
-        context['blog_list'] = blog_list
+        event_list = EventPost.objects.search(query=query)
+        context['event_list'] = event_list
     return render(request, 'searches/view.html',context)

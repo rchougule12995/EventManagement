@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0008_auto_20190403_2022'),
+        ('event', '0008_auto_20190403_2022'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blogpost',
+            model_name='eventpost',
             name='image',
             field=models.FileField(blank=True, null=True, upload_to='image/'),
         ),
