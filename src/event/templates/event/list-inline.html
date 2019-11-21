@@ -1,5 +1,5 @@
  <div class='col-12 col-md-10 mb-3 mx-auto'>
- <div class='card {% if not event_post.publish_date %} border border-warning text-dark {% endif %}'>
+ <div class='card'>
     <div class='card-body'>
         {% if event_post.image %}
             <a href="{{ event_post.get_absolute_url }}">
@@ -15,12 +15,12 @@
                 {{ event_post.content|linebreaks }}
             {% endif %}
         </p>
-
-        {% if not detail %}
+        <a href="{{ event_post.get_absolute_url }}">View</a>
+        <!--{% if not detail %}
             {% if not event_post.publish_date %} Draft {% endif %}
-            <a href="{{ event_post.get_absolute_url }}">View</a>
 
-        {% endif %}
+
+        {% endif %}-->
     </div>
 
  </div>
