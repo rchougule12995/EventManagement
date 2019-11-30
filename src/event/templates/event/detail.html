@@ -13,8 +13,8 @@
         {% if request.user.is_staff %}
          <div class='col-12'>
             <a class='btn btn-primary' href='{{ object.get_edit_url }}'>Edit</a>
-            <a class='btn btn-primary' href='{{ object.get_delete_url }}'>Delete</a>
-            <a class='btn btn-primary' href='{{ object.get_archive_url }}'>Archive</a>
+            <a class='btn btn-danger' href='{{ object.get_delete_url }}'>Delete</a>
+            <a class='btn btn-warning' href='{{ object.get_archive_url }}'>Archive</a>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-id="{{object.id}}" data-target="#share_event">Share</button>
         </div>
         {% endif %}
@@ -33,9 +33,10 @@
     </div>
     <div class="modal-body">
       <form class="" action="index.html" method="post">
-        <select class="form-control" name="shared_users" multiple>
-          for(usr in Users):
+         <select class="form-control" name="shared_users" multiple>
+          {% for usr in Users %}
             <option value="{{ usr.id }}">{{usr.username}}</option>
+            {% endfor %}
         </select>
       </form>
     </div>
@@ -49,19 +50,21 @@
 
 {% endblock %}
 
-{% block script %}
-  <script type="text/javascript">
+{% block content2 %}
 
+<script type="text/javascript">
+  //console.log({{Users}});
   $('#share_event').on('show.bs.modal', function () {
-       evt_id = $("#share_event").val($(this).data('id'));
-       console.log(evt_id);
-      $('#share_event_popup').trigger('focus');
-    })
+       //evt_id = $("#share_event").data('id');
+    //   console.log(Users);
 
-    showPopUp(){
-      var popup = document.getElementById("share_event_popup");
-      popup.classList.toggle("show");
-    }
-  </script>
+      $('#share_event_popup').trigger('focus');
+    });
+
+    // showPopUp(){
+    //   var popup = document.getElementById("share_event_popup");
+    //   popup.classList.toggle("show");
+    // }
+</script>
 
 {% endblock %}
