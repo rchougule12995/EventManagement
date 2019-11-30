@@ -66,3 +66,6 @@ class EventPost(models.Model): # eventpost_set -> queryset
 
     def get_archive_url(self):
         return f"{self.get_absolute_url()}/archive"
+
+    def get_share_url(self):
+        return f"{self.get_absolute_url()}/share"

@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.models import User
 
 # Create your views here.
 from .forms import EventPostModelForm
@@ -16,6 +17,7 @@ def event_post_list_view(request):
     #my_qs = EventPost.objects.filter(user=request.user)
     #qs = (qs | my_qs).distinct()
     template_name = 'event/list.html'
+    # User = get_user_model()
     context = {'object_list': qs}
     return render(request, template_name, context)
 
@@ -40,13 +42,18 @@ def event_post_create_view(request):
 def event_post_detail_view(request, slug):
     # 1 object -> detail view
     obj = get_object_or_404(EventPost, slug=slug)
+    userList = User.objects.all()
+    print(userList)
     template_name = 'event/detail.html'
-    context = {"object": obj}
+    context = {"object": obj, 'Users': userList}
     return render(request, template_name, context)
 
 @staff_member_required
 def event_post_update_view(request, slug):
     obj = get_object_or_404(EventPost, slug=slug)
+    if obj.user != request.user:
+        return HttpResponseForbidden()
+
     form = EventPostModelForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
@@ -58,6 +65,8 @@ def event_post_update_view(request, slug):
 @staff_member_required
 def event_post_delete_view(request, slug):
     obj = get_object_or_404(EventPost, slug=slug)
+    if obj.user != request.user:
+        return HttpResponseForbidden()
     template_name = 'event/delete.html'
     if request.method == "POST":
         obj.delete()
@@ -68,9 +77,16 @@ def event_post_delete_view(request, slug):
 @staff_member_required
 def event_post_archive_view(request, slug):
     obj = get_object_or_404(EventPost, slug=slug)
+    if obj.user != request.user:
+        return HttpResponseForbidden()
     print(obj.status)
     obj.status='archive'
     print("NEW STATUS")
     print(obj.status)
     obj.save()
     return redirect('/event')
+
+@staff_member_required
+def event_post_share(request, slug):
+    #get_object(Users)
+    return redirect('')

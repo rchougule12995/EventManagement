@@ -5,6 +5,7 @@ from .views import (
     event_post_update_view,
     event_post_delete_view,
     event_post_archive_view,
+    event_post_share,
 )
 
 urlpatterns = [
@@ -13,4 +14,5 @@ urlpatterns = [
     path('<str:slug>/edit/', event_post_update_view),
     path('<str:slug>/delete/', event_post_delete_view),
     path('<str:slug>/archive/', event_post_archive_view),
+    path('<str:slug>/share/', event_post_share),
 ]
