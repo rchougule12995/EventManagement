@@ -20,6 +20,8 @@ from event.views import (
     event_post_create_view,
 )
 
+# Overriding the default Django Administration Panel
+
 admin.site.site_header = 'Event Management Administration'
 admin.site.site_title = 'Event Posts Administration'
 admin.site.index_title = 'Event Administration'

@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
-# Dont Repeat Yourself = DRY
 
 from .forms import ContactForm
 from event.models import EventPost

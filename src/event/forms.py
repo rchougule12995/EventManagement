@@ -19,5 +19,5 @@ class EventPostModelForm(forms.ModelForm):
         if instance is not None:
             qs = qs.exclude(pk=instance.pk) # id=instance.id
         if qs.exists():
-            raise forms.ValidationError("This title has already been used. Please try again.")
+            raise forms.ValidationError("This Event title has already been used. Please try again.")
         return title

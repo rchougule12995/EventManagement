@@ -55,7 +55,6 @@ def event_post_update_view(request, slug):
     obj = get_object_or_404(EventPost, slug=slug)
     if obj.user != request.user:
         return HttpResponseForbidden()
-
     form = EventPostModelForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()

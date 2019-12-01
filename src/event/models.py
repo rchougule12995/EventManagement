@@ -24,7 +24,6 @@ class EventPostQuerySet(models.QuerySet):
 
         return self.filter(lookup)
 
-
 class EventPostManager(models.Manager):
     def get_queryset(self):
         return EventPostQuerySet(self.model, using=self._db)
