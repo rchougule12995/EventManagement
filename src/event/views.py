@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.http import Http404, HttpResponseForbidden
+from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 from .forms import EventPostModelForm
@@ -43,7 +45,7 @@ def event_post_detail_view(request, slug):
     # 1 object -> detail view
     obj = get_object_or_404(EventPost, slug=slug)
     userList = User.objects.all()
-    print(userList)
+    #print(userList)
     template_name = 'event/detail.html'
     context = {"object": obj, 'Users': userList}
     return render(request, template_name, context)
@@ -89,4 +91,14 @@ def event_post_archive_view(request, slug):
 @staff_member_required
 def event_post_share(request, slug):
     #get_object(Users)
-    return redirect('')
+    obj = get_object_or_404(EventPost, slug=slug)
+    context = {"object": obj}
+    subject = 'Event Invitation'
+    message = request.build_absolute_uri()
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['event.managementrc@gmail.com',]
+    html_content =  request.build_absolute_uri()
+    #print(html_message)
+    send_mail( subject, message, email_from, recipient_list, html_content )
+    return redirect("/event")
+    #return HttpResponseRedirect(" ")
